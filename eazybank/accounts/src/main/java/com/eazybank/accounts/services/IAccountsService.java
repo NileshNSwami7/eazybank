@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public interface IAccountsService {
 
     void createAccount(CustomerDto costumerDto);
+
+    CustomerDto fetchAccountDetails(String mobileNumber);
 }

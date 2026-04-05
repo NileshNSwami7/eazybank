@@ -10,7 +10,7 @@ import lombok.*;
 public class Accounts extends BaseEntity{
 
     @Column(name="customer_id")
-    private Long custtomerId;
+    private Long customerId;
 
     @Column(name="account_number")
     @Id

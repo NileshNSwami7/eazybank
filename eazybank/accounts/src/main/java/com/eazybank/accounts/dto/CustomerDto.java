@@ -3,10 +3,11 @@ package com.eazybank.accounts.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data@AllArgsConstructor
+@Data
 public class CustomerDto {
 
     private String name;
     private String email;
     private String mobileNumber;
+    private AccountsDto accountDto;
 }
