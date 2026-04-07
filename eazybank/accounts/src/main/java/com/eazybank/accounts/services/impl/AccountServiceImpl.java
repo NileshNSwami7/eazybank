@@ -44,8 +44,6 @@ public class AccountServiceImpl implements IAccountsService {
         account.setAccountNumber(acntNumber);
         account.setAccountType(AccountsConstants.SAVINGS);
         account.setBranchAddress(AccountsConstants.ADDRESS);
-        account.setCreatedAt(LocalDateTime.now());
-        account.setCreatedBy("Ananamouse");
         return account;
     }
 
