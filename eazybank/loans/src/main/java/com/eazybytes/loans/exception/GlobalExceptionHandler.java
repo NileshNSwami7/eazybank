@@ -3,6 +3,7 @@ package com.eazybytes.loans.exception;
 import com.eazybytes.loans.dto.ErrorResponseDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -20,16 +21,18 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    public ResponseEntity<Object>handleMethodArgumentNotHandle(
-            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest webRequest ){
-        Map<String,String>validationerrors = new HashMap<>();
+
+    protected  ResponseEntity<Object>handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest webRequest ){
+        Map<String,String>validationErrors = new HashMap<>();
         List<ObjectError>validationList = ex.getBindingResult().getAllErrors();
+
         validationList.forEach((error)->{
             String fieldName = ((FieldError)error).getField();
             String validationMessage = error.getDefaultMessage();
-            validationerrors.put(fieldName,validationMessage);
+            validationErrors.put(fieldName,validationMessage);
         });
-        return new ResponseEntity<>(validationerrors,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(validationErrors,HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

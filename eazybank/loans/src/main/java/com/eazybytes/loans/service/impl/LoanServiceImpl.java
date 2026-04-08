@@ -32,7 +32,7 @@ public class LoanServiceImpl  implements LoanServices {
 
     private Loans createNewLoans(String mobileNumber){
         Loans newloan = new Loans();
-        long randomLoanNumber = 10000000000L + new Random().nextInt(900000000);
+        long randomLoanNumber = 100000000000L + new Random().nextInt(900000000);
         newloan.setLoanNumber(Long.toString(randomLoanNumber));
         newloan.setMobileNumber(mobileNumber);
         newloan.setLoanType(LoansConstants.HOME_LOAN);
@@ -47,5 +47,13 @@ public class LoanServiceImpl  implements LoanServices {
                 .orElseThrow(()-> new ResourceNotFoundException("Loans","Mobile Number",mobileNumber));
             LoansDto loansDto = LoansMapper.mapToLoansDto(loans,new LoansDto());
             return loansDto;
+    }
+
+    public boolean updateLoanDetails(LoansDto loansDto){
+        Loans loans = loansRepository.findByLoanNumber(loansDto.getLoanNumber())
+                .orElseThrow(()-> new ResourceNotFoundException("Loan","Loan Number",loansDto.getLoanNumber()));
+        LoansMapper.mapToLoans(loansDto,loans);
+        loansRepository.save(loans);
+        return true;
     }
 }

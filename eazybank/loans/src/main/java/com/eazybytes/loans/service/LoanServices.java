@@ -10,4 +10,5 @@ public interface LoanServices {
 
     LoansDto fetchLoansDetails(String mobileNumber);
 
+    boolean updateLoanDetails(LoansDto loansDto);
 }
