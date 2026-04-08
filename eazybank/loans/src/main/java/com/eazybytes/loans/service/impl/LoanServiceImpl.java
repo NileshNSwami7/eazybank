@@ -1,15 +1,17 @@
 package com.eazybytes.loans.service.impl;
 
 import com.eazybytes.loans.constants.LoansConstants;
+import com.eazybytes.loans.dto.LoansDto;
 import com.eazybytes.loans.entity.Loans;
 import com.eazybytes.loans.exception.LoanAlreadyExistException;
+import com.eazybytes.loans.exception.ResourceNotFoundException;
+import com.eazybytes.loans.mapper.LoansMapper;
 import com.eazybytes.loans.repository.LoansRepository;
 import com.eazybytes.loans.service.LoanServices;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.Random;
 
@@ -38,5 +40,12 @@ public class LoanServiceImpl  implements LoanServices {
         newloan.setAmountPaid(0);
         newloan.setOutstandingAmount(LoansConstants.NEW_LOAN_LIMIT);
         return newloan;
+    }
+
+    public LoansDto fetchLoansDetails(String mobileNumber){
+        Loans loans = loansRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(()-> new ResourceNotFoundException("Loans","Mobile Number",mobileNumber));
+            LoansDto loansDto = LoansMapper.mapToLoansDto(loans,new LoansDto());
+            return loansDto;
     }
 }
