@@ -112,7 +112,6 @@ public class LoansController {
             )
         }
     )
-
     @PutMapping("/update")
     public ResponseEntity<ResponseDto>updateLoansDetails(@Valid @RequestBody LoansDto loansDto){
         boolean isUpdate = iloanServices.updateLoanDetails(loansDto);
@@ -124,6 +123,41 @@ public class LoansController {
             return ResponseEntity
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(LoansConstants.STATUS_417,LoansConstants.MESSAGE_417_UPDATE));
+        }
+    }
+
+    @Operation(
+            summary = "Delete loans details REST API",
+            description = "REST API to delete loans based on mobile number."
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "417",
+                    description = "EXPECTATION FAILED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error.",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDto>deleteLoanDetails(@RequestParam String mobileNumber){
+        boolean isDeleted = iloanServices.deleteLoans(mobileNumber);
+        if(isDeleted){
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new ResponseDto(LoansConstants.STATUS_200,LoansConstants.MESSAGE_200));
+        }else{
+            return ResponseEntity
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(LoansConstants.STATUS_417,LoansConstants.MESSAGE_417_DELETE));
         }
     }
 }

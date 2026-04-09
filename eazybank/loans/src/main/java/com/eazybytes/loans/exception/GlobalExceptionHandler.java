@@ -22,13 +22,13 @@ import java.util.Map;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 
-    protected  ResponseEntity<Object>handleMethodArgumentNotValidException(
+    protected  ResponseEntity<Object>handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest webRequest ){
         Map<String,String>validationErrors = new HashMap<>();
         List<ObjectError>validationList = ex.getBindingResult().getAllErrors();
 
         validationList.forEach((error)->{
-            String fieldName = ((FieldError)error).getField();
+            String fieldName = ((FieldError) error).getField();
             String validationMessage = error.getDefaultMessage();
             validationErrors.put(fieldName,validationMessage);
         });
