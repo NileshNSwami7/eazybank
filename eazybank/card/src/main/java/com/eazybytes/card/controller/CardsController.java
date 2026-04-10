@@ -35,7 +35,7 @@ public class CardsController {
 
     @PostMapping("/create")
     @Operation(
-            summary = "CREATE card REST API",
+            summary = "Create card REST API",
             description = "REST API to create new Card inside eazybank."
     )
     @ApiResponses({
@@ -62,7 +62,7 @@ public class CardsController {
                 .body(new ResponseDto(CardsConstants.STATUS_201,CardsConstants.MESSAGE_201));
     }
     @Operation(
-            summary = "REST API to FETCH the cards details.",
+            summary = "Fetch the cards details REST API.",
             description = "REST API to fetch the card details based on mobile number."
     )
     @ApiResponses({
@@ -87,7 +87,7 @@ public class CardsController {
                 .body(cardDto);
     }
     @Operation(
-            summary = "UPDATE cards details REST API",
+            summary = "Update cards details REST API",
             description = "REST API to update cards details based on card number"
     )
     @ApiResponses({
@@ -119,7 +119,7 @@ public class CardsController {
          }
     }
     @Operation(
-            summary = "DELETE Card details REST API",
+            summary = "Delete Card details REST API",
             description = "REST API to DELETE cards details based on mobile number"
     )
     @ApiResponses({
