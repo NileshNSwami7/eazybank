@@ -4,6 +4,8 @@ import com.eazybytes.card.constants.CardsConstants;
 import com.eazybytes.card.dto.CardsDto;
 import com.eazybytes.card.entity.Cards;
 import com.eazybytes.card.exception.CardAlreadyExistsException;
+import com.eazybytes.card.exception.ResourceNotFoundException;
+import com.eazybytes.card.mapper.CardsMapper;
 import com.eazybytes.card.repository.CardsRepository;
 import com.eazybytes.card.service.CardsService;
 import lombok.AllArgsConstructor;
@@ -36,4 +38,13 @@ public class CardsServiceImpl implements CardsService {
         newcard.setAvailableAmount(CardsConstants.NEW_CARD_LIMIT);
         return  newcard;
     }
+
+    public CardsDto fetchcardsDetials(String mobileNumber){
+        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).
+                orElseThrow(()->new ResourceNotFoundException("Cards","mobileNumber",mobileNumber)
+                );
+        return CardsMapper.mapToCarsDto(cards, new CardsDto());
+    }
+
+
 }
