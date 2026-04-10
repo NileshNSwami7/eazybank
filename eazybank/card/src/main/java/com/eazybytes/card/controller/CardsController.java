@@ -58,7 +58,7 @@ public class CardsController {
                 .body(new ResponseDto(CardsConstants.STATUS_201,CardsConstants.MESSAGE_201));
     }
     @Operation(
-            summary = "REST API to fetch the cards details.",
+            summary = "REST API to FETCH the cards details.",
             description = "REST API to fetch the card details based on mobile number."
     )
     @ApiResponses({
@@ -82,6 +82,70 @@ public class CardsController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(cardDto);
     }
-
-    
+    @Operation(
+            summary = "UPDATE cards details REST API",
+            description = "REST API to update cards details based on card number"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "417",
+                    description = "HTTP Status EXPECTATION_FAILED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDto>updateCardsDetails(@Valid @RequestBody CardsDto cardsDto){
+         boolean isCardsUpdated = icardService.updatecardsDetails(cardsDto);
+         if(isCardsUpdated){
+             return ResponseEntity.status(HttpStatus.OK)
+                     .body(new ResponseDto(CardsConstants.STATUS_200, CardsConstants.MESSAGE_200));
+         }else{
+             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                     .body(new ResponseDto(CardsConstants.STATUS_417,CardsConstants.MESSAGE_417_UPDATE));
+         }
+    }
+    @Operation(
+            summary = "Delete Card details REST API",
+            description = "REST API to DELETE cards details based on mobile number"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "417",
+                    description = "HTTP Status EXPECTATION_FAILED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDto>deleteCard(@RequestParam
+                                                     @Pattern(regexp = "(^$|[0-9]{10})",message = "Mobile number must be 10 digits.")
+                                                     String mobileNumber){
+        boolean isCardDelete = icardService.deleteCardDetails(mobileNumber);
+        if(isCardDelete){
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDto(CardsConstants.STATUS_200, CardsConstants.MESSAGE_200));
+        }else{
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(CardsConstants.STATUS_417,CardsConstants.MESSAGE_417_DELETE));
+        }
+    }
 }

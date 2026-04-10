@@ -8,4 +8,9 @@ public interface CardsService {
     void createCard(String mobileNumber);
 
     CardsDto fetchcardsDetials(String mobileNumber);
+
+    boolean updatecardsDetails(CardsDto cardsDto);
+
+    boolean deleteCardDetails(String mobileNumber);
+
 }
