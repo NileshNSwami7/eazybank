@@ -29,7 +29,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
         ),
         externalDocs=@ExternalDocumentation(
                 description="eazyBank Cards Microservices REST API Documentation",
-                url="http://localhost:8080/swagger-ui/index.html"
+                url="http://localhost:9000/swagger-ui/index.html"
         )
 )
 public class CardApplication {

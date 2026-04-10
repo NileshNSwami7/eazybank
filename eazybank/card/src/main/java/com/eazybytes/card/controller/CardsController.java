@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+@Tag(
+        name = "CRUD REST APIs for Cards in EazyBank",
+        description = "CRUD REST APIs in EazyBank to CREATE, UPDATE, FETCH AND DELETE cards details"
+)
 @RestController
 @RequestMapping(path="/eazybank/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
@@ -115,7 +119,7 @@ public class CardsController {
          }
     }
     @Operation(
-            summary = "Delete Card details REST API",
+            summary = "DELETE Card details REST API",
             description = "REST API to DELETE cards details based on mobile number"
     )
     @ApiResponses({

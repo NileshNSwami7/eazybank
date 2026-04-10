@@ -30,7 +30,7 @@ public class CardsDto {
 
     @NotEmpty(message = "Card should not be null or empty.")
     @Schema(
-            description = "Tyep of the card", example = "Credit card."
+            description = "Type of the card", example = "Credit card."
     )
     private String cardType;
 
