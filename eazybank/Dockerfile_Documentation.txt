@@ -1,0 +1,34 @@
+How to create docker image?
+
+Steps:
+	1.Click and open microservice that you want to create jar/war file.
+	2.Click on target folder and delete all the file from that folder.
+	3.Click on and open pom.xml add<packaging>jar</packaging> thereafter <artfactId></artfactId>,<version></version>tag. 
+	4.Go to exact path of microservice path in file explorer folder type cmd and ron following basic maven commands.
+
+basic maven commands:
+	1.mvn -version =to check version.
+	2.mvn cean install = to create jar file inside target folder
+	3.mvn spring-boot:run = to run the spring microservice program
+	4.java -jar target/account-0.0.1-SNAPSHOT.jar = this is java command to run specifc jar.file
+
+create docker image for microservice:
+	1.Open your IDE eclipse/intellij idea
+	2.Right click on microservice and create file without any extention.
+	3.write some instruction like:
+		-> FROM image name:tag name
+		-> LABEL "Dokcer account name.com"
+		-> COPY target/jar file name.jar jarfile name.jar/war
+		-> ENTRYPOINT ["java","-jar","jarfile name.jar"]
+	4.open command prompt form perticular microservice folder
+	5.After open cmd check the path and run the command like: 
+	
+		docker build (path of that folder) -t (docker aocount username)/microservice name:tag name or version name
+		(e.g docker build . -t NilNS07/accounts:dockerv1) 
+		NOTE:By default, Docker only looks for a file named exactly Dockerfile.
+		To use your custom-named file, you must use the -f (file) flag.
+		dot represent that the dockerfile present in current folder 
+		-t is tag
+	
+	6.docker images = to check whether the image is created or not this command give list of all your images.
+	7.docker inspect image ImageId = this command is to inspect the image.
