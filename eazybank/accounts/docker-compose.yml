@@ -1,0 +1,39 @@
+services:
+  accounts:
+    image: "nins07/accounts:eazyaccountsv1"
+    container_name: accounts-ms
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+        - eazybank
+  loans:
+    image: "nins07/loans:eazyloansv1"
+    container_name: loans-ms
+    ports:
+      - "8090:8090"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+       - eazybank
+
+  card:
+    image: "nins07/card:eazycardsv1"
+    container_name: cards-ms
+    ports:
+      - "9000:9000"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eazybank
+
+networks:
+ eazybank:
+  driver: "bridge"
