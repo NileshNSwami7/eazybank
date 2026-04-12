@@ -1,0 +1,29 @@
+Create docker image and container using google jib approach
+
+Steps:
+	1.Click on micrservices and open pom.xml file add
+		  <packaging>jar</packaging> there after<artifactId></artifactId><version></version> 
+		  
+		  then add the plugin
+		  
+		  <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <to>
+                        <image>nilns07/${project.artifactId}:eazycardsv1</image>
+                    </to>
+                </configuration>
+            </plugin>
+	
+	2.Open cmd promt from your mcrservice folder from file explorer.
+	3.Run "mvn compile jib:dockerBuild" this will create dokcer image in your local docker application 
+	
+		Note:google jib approach is used only for java program.
+             This is the most convienient approach.
+			 Also you can create a docker image without having local docker in your computer.
+			 "mvn compile jib:build"
+			 You can just add the docker image on cloud repository.
+			 
+			
