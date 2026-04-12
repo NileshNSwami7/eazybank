@@ -151,7 +151,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>nilns07/${project.artifactId}:eazycardsv1</image>
+                        <image>nins07/${project.artifactId}:eazycardsv1</image>
                     </to>
                 </configuration>
             </plugin>

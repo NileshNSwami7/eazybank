@@ -125,7 +125,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
                     <image>
-                        <name>nilns07/${project.artifactId}:eazyloansv1</name>
+                        <name>nins07/${project.artifactId}:eazyloansv1</name>
                     </image>
 					<excludes>
 						<exclude>

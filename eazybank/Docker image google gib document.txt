@@ -26,4 +26,23 @@ Steps:
 			 "mvn compile jib:build"
 			 You can just add the docker image on cloud repository.
 			 
-			
+To deploy your image from local docker to the remote location like docker hub
+ you need to login in your local docker app and connected with docker hub. if not logged in then run 
+	
+	-> "docker login -u dockeruserIdname" e.g docker login -u nins07
+	
+	then password (if you signup the docker account with regular procedure you can type your password we can't see)
+	If you are login with google account you need to generate Token.
+		1.Click on docker hub profile 
+		2.Click on My Account Profile then
+		3.At left side you can see setting gear box symbol click on it and click on "Personal access tokens".
+		4.Click on generate new token, create access token also give access permission read write delete permission.
+		5.Copy the token and paste to the password (it will not visible to you)press enter you can login successfully.
+		
+To push image on docker hub.
+	
+	"docker image push docker.io/docker image"
+	
+to pull image in your local docker from docker hub
+
+	"docker pull dockerimage"
