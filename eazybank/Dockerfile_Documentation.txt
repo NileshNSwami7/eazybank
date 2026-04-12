@@ -1,3 +1,7 @@
+
+Docker file approach:
+
+
 How to create docker image?
 
 Steps:
@@ -32,3 +36,10 @@ create docker image for microservice:
 	
 	6.docker images = to check whether the image is created or not this command give list of all your images.
 	7.docker inspect image ImageId = this command is to inspect the image.
+
+Run docker containers:
+	1.docker run -p 8080:8080 docker image name (e.g docker run -p 8080:8080 NilNS07/accounts:dockerv1) it will run the docker image
+	2.docker run -d -p 8080:8080 docker image name (e.g docker run -d -p 8080:8080 NilNS07/accounts:dockerv1) it will detach the image
+	  image and run in background at the same time we can run other dokcer containers.
+	3.docker ps  =>to list the how many dokcer image or container are running.
+	4.docker ps -a  =>to list running and stop container.
