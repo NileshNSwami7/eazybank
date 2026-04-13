@@ -20,3 +20,12 @@ spring:
 
 build:
   version: "1.0.0"
+
+accounts:
+  message: "Welcome to eazybank accounts to related API."
+  contactDetails:
+    name: "Mahindra Singh"
+    email: "mahindrasingh@eazybank.com"
+  onCallSupport:
+    -(+91) 98083 93738
+    -(+91) 98083 93735
