@@ -17,9 +17,15 @@ spring:
       hibernate:
         ddl-auto: update
       show-sql: true
-
+  config:
+    import:
+      - "application_prod.yml"
+      - "application_qa.yml"
+  profiles:
+    active:
+      - "prod"
 build:
-  version: "1.0.0"
+  version: "3.0.0"
 
 accounts:
   message: "Welcome to eazybank accounts to related API."
@@ -27,5 +33,5 @@ accounts:
     name: "Mahindra Singh"
     email: "mahindrasingh@eazybank.com"
   onCallSupport:
-    -(+91) 98083 93738
-    -(+91) 98083 93735
+    - (+91) 98083 93738
+    - (+91) 98083 93735

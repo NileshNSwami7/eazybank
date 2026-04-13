@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "2.0.0"
+
+accounts:
+  message: "Welcome to eazybank accounts to related QA API."
+  contactDetails:
+    name: "Raj Naga"
+    email: "rajnaga@eazybank.com"
+  onCallSupport:
+    - (05) 28083 93755
+    - (05) 28083 93753
