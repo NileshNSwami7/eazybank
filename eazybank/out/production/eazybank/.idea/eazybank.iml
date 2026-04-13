@@ -26,5 +26,16 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:4.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:4.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:7.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:7.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:4.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:4.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:7.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:7.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:4.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:4.0.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.transaction:jakarta.transaction-api:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:3.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aspects:7.0.1" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-annotations-jakarta:2.2.28" level="project" />
   </component>
 </module>
