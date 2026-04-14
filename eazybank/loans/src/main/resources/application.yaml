@@ -1,6 +1,10 @@
 server:
     port: 8090
 spring:
+  application:
+    name: "loans"
+  profiles:
+    active: "prod"
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -10,27 +14,11 @@ spring:
   h2:
     console:
       enabled: true
-    jpa:
-      database-platform: org.hibernate.dialect.H2Dialect
-      hibernate:
-        ddl-auto: update
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
     show-sql: true
   config:
-    import:
-      - "application_prod.yml"
-      - "application_qa.yml"
-  profiles:
-    active:
-      - "prod"
+      import: "optional:configserver:http://localhost:8071/"
 
-build:
-    version: "3.0.3"
-
-loans:
-  message: "Welcome to eazybank loans to related API."
-  contactDetails:
-    name: "Boby Singh"
-    email: "bodysingh@eazybank.com"
-  onCallSupport:
-    - (+94) 87645 98465
-    - (+94) 87645 98409
