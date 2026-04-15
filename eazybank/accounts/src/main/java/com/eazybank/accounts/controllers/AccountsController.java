@@ -1,9 +1,7 @@
 package com.eazybank.accounts.controllers;
 
 import com.eazybank.accounts.constants.AccountsConstants;
-import com.eazybank.accounts.dto.AccountContactInfo;
-import com.eazybank.accounts.dto.CustomerDto;
-import com.eazybank.accounts.dto.ErrorResponseDto;import com.eazybank.accounts.dto.ResponseDto;
+import com.eazybank.accounts.dto.*;
 import com.eazybank.accounts.services.IAccountsService;
 import io.swagger.v3.oas.annotations.Operation;import io.swagger.v3.oas.annotations.media.Content;import io.swagger.v3.oas.annotations.media.Schema;import io.swagger.v3.oas.annotations.responses.ApiResponse;import io.swagger.v3.oas.annotations.responses.ApiResponses;import io.swagger.v3.oas.annotations.tags.Tag;import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -39,7 +37,7 @@ public class AccountsController {
     private Environment environment;
 
     @Autowired
-    private AccountContactInfo accountContactInfo;
+    private AccountsContactInfoDto accountsContactInfoDto;
 
     @Operation(
             summary="Create Account REST API",
@@ -224,9 +222,9 @@ public class AccountsController {
             )
     })
     @GetMapping("/contact-info")
-    public ResponseEntity<AccountContactInfo>getAAccountinfo(){
+    public ResponseEntity<AccountsContactInfoDto>getAAccountinfo(){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(accountContactInfo);
+                .body(accountsContactInfoDto);
     }
 }

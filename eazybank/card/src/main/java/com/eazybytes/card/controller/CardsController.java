@@ -1,7 +1,7 @@
 package com.eazybytes.card.controller;
 
 import com.eazybytes.card.constants.CardsConstants;
-import com.eazybytes.card.dto.CardsContactInfo;
+import com.eazybytes.card.dto.CardsContactInfoDto;
 import com.eazybytes.card.dto.CardsDto;
 import com.eazybytes.card.dto.ErrorResponseDto;
 import com.eazybytes.card.dto.ResponseDto;
@@ -14,10 +14,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
-import org.aspectj.bridge.IMessage;
-import org.hibernate.stat.CacheableDataStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -48,7 +44,7 @@ public class CardsController {
     private Environment environment;
 
     @Autowired
-    private CardsContactInfo cardsContactInfo;
+    private CardsContactInfoDto cardsContactInfoDto;
 
     @PostMapping("/create")
     @Operation(
@@ -236,8 +232,8 @@ public class CardsController {
     }
     )
     @GetMapping("/contact-info")
-    public ResponseEntity<CardsContactInfo>getCardsContactInfo(){
-        return ResponseEntity.status(HttpStatus.OK).body(cardsContactInfo);
+    public ResponseEntity<CardsContactInfoDto>getCardsContactInfo(){
+        return ResponseEntity.status(HttpStatus.OK).body(cardsContactInfoDto);
     }
 
 }

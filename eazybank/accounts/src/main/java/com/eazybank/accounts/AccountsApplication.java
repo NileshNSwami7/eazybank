@@ -1,6 +1,6 @@
 package com.eazybank.accounts;
 
-import com.eazybank.accounts.dto.AccountContactInfo;
+import com.eazybank.accounts.dto.AccountsContactInfoDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "AuditawareImpl")
-@EnableConfigurationProperties(value= AccountContactInfo.class)
+@EnableConfigurationProperties(value= AccountsContactInfoDto.class)
 @OpenAPIDefinition(
         info = @Info(
                 title="Account microservice REST API Documentation.",

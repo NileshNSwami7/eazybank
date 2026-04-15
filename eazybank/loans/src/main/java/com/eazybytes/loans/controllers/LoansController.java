@@ -2,7 +2,7 @@ package com.eazybytes.loans.controllers;
 
 import com.eazybytes.loans.constants.LoansConstants;
 import com.eazybytes.loans.dto.ErrorResponseDto;
-import com.eazybytes.loans.dto.LoansContactInfo;
+import com.eazybytes.loans.dto.LoansContactInfoDto;
 import com.eazybytes.loans.dto.LoansDto;
 import com.eazybytes.loans.dto.ResponseDto;
 import com.eazybytes.loans.service.LoanServices;
@@ -15,9 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
 
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -49,7 +47,7 @@ public class LoansController {
     private Environment environment;
 
     @Autowired
-    private LoansContactInfo loansContactInfo;
+    private LoansContactInfoDto loansContactInfoDto;
 
     @Operation(
             summary = "Create Loan REST API",
@@ -242,9 +240,9 @@ public class LoansController {
             )
     })
     @GetMapping("/contact-info")
-    public ResponseEntity<LoansContactInfo>getLoansContactInfo(){
+    public ResponseEntity<LoansContactInfoDto>getLoansContactInfo(){
         return ResponseEntity.status(HttpStatus.OK)
-                .body(loansContactInfo);
+                .body(loansContactInfoDto);
     }
 
 }
