@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: configserver
+  profiles:
+    #active: native
+    active: git
+  cloud:
+    config:
+      server:
+        #native:
+          #search-locations: "classpath:/config"
+          #search-locations: "file:///C://Users//Nilesh//Documents//eazybank//config"
+         git:
+           uri: "https://github.com/NileshNSwami7/eazybank-config-microservices.git"
+           default-label: main
+           timeout: 5
+           clone-on-start: true
+           force-pull: true
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+encrypt:
+  key: "eecf6fc4c6a1a3d64880b237e06f795c"
+
+server:
+  port: 8071
+
+
+
+

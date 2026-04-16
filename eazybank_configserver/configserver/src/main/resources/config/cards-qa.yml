@@ -1,0 +1,11 @@
+build:
+  version: "2.0.1"
+
+cards:
+  message: "Welcome to eazybank cards to qa related API."
+  contactDetails:
+    name: "Sakshi Raj"
+    email: "sakshiraj@eazybank.com"
+  onCallSupport:
+    - (+19) 756245 98765
+    - (+19) 756245 98787
