@@ -13,11 +13,11 @@ import org.hibernate.annotations.GenericGenerator;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Loans extends BaseEnity {
+public class Loans extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "native")
-    private long laonId;
+    private long loanId;
     private String mobileNumber;
     private String loanNumber;
     private String loanType;

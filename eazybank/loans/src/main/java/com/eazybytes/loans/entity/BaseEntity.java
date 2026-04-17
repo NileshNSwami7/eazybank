@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class BaseEnity {
+public class BaseEntity {
 
     @CreatedDate
     @Column(updatable = false)
@@ -30,7 +30,7 @@ public class BaseEnity {
 
     @LastModifiedDate
     @Column(insertable = false)
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 
     @LastModifiedBy
     @Column(insertable = false)

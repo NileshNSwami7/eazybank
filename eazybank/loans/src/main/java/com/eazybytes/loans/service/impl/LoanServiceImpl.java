@@ -60,7 +60,7 @@ public class LoanServiceImpl  implements LoanServices {
     public boolean deleteLoans(String mobileNumber){
         Loans loans = loansRepository.findByMobileNumber(mobileNumber).
                 orElseThrow(()->new ResourceNotFoundException("Loans","Mobile Number",mobileNumber));
-        loansRepository.deleteById(loans.getLaonId());
+        loansRepository.deleteById(loans.getLoanId());
         return true;
     }
 }
