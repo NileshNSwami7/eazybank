@@ -5,31 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05510bbc-9467-4c53-a0ba-f37896951866" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/fileColors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/src/main/java/com/eazybank/accounts/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/src/main/java/com/eazybank/accounts/entity/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/card/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/card/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/card/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/card/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configserver/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/configserver/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configserver/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/configserver/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose/default/common-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/default/common-config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose/default/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/default/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose/prod/common-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/prod/common-config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose/prod/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/prod/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose/qa/common-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/qa/common-config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose/qa/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/qa/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/loans/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/loans/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loans/src/main/java/com/eazybytes/loans/entity/BaseEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/loans/src/main/java/com/eazybytes/loans/entity/Loans.java" beforeDir="false" afterPath="$PROJECT_DIR$/loans/src/main/java/com/eazybytes/loans/entity/Loans.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loans/src/main/java/com/eazybytes/loans/service/impl/LoanServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/loans/src/main/java/com/eazybytes/loans/service/impl/LoanServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/loans/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/loans/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +93,7 @@
       <recent name="D:\Programming Room\Spring program\Spring Boot Microservices\eazybank\configserver\src\main\resources\config" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.AccountsApplication">
+  <component name="RunManager" selected="Spring Boot.LoansApplication">
     <configuration name="&lt;default&gt;" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="" />
@@ -197,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.AccountsApplication" />
-        <item itemvalue="Spring Boot.EurekaserverApplication" />
-        <item itemvalue="Spring Boot.ConfigserverApplication" />
         <item itemvalue="Spring Boot.LoansApplication" />
         <item itemvalue="Spring Boot.CardApplication" />
+        <item itemvalue="Spring Boot.EurekaserverApplication" />
+        <item itemvalue="Spring Boot.ConfigserverApplication" />
+        <item itemvalue="Spring Boot.AccountsApplication" />
       </list>
     </recent_temporary>
   </component>
