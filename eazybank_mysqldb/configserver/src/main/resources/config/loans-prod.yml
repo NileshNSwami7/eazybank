@@ -1,0 +1,11 @@
+build:
+  version: "1.0.3"
+
+loans:
+  message: "Welcome to eazybank loans to prod related API."
+  contactDetails:
+    name: "Ram kishan"
+    email: "ramkishan@eazybank.com"
+  onCallSupport:
+    - (+88) 645827 876366
+    - (+88) 645827 876376
