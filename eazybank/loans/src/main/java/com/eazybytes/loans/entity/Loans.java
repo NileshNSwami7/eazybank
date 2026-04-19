@@ -17,7 +17,7 @@ public class Loans extends BaseEnity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "native")
-    private long laonId;
+    private long loanId;
     private String mobileNumber;
     private String loanNumber;
     private String loanType;
