@@ -9,7 +9,8 @@ spring:
         webflux:
           discovery:
             locator:
-              enabled: true
+              enabled: false
+              lowerCaseServerId: true
 
 management:
   endpoints:
@@ -23,9 +24,14 @@ management:
     env:
       enabled: true
 
-
 info:
   app:
     name: "gatewayserver"
     description: "Eazy Bank gateway server Application."
     version: "1.0.0"
+
+logging:
+  level:
+    com:
+      eazybank:
+        accounts: DEBUG

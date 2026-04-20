@@ -7,11 +7,14 @@ import org.apache.commons.lang3.ClassUtils;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient("cards")
 public interface CardsFeignClient {
 
     @GetMapping(value="/eazybank/api/fetch", consumes="application/json")
-    public ResponseEntity<CardsDto> fetchCardsDetails(@RequestParam String mobileNumber);
+    public ResponseEntity<CardsDto> fetchCardsDetails(
+            @RequestHeader("Eazybank -correlation-id")String correlationID,
+            @RequestParam String mobileNumber);
 }
