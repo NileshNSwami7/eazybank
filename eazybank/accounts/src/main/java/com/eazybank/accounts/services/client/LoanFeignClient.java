@@ -13,6 +13,6 @@ public interface LoanFeignClient {
 
     @GetMapping(value = "/eazybank/api/fetch",consumes = "application/json")
     public ResponseEntity<LoansDto> fetchLoansDetails(
-            @RequestHeader("Eazybank-correlation-Id") String correlationId,
+            @RequestHeader("eazybank-correlation-id") String correlationId,
             @RequestParam String mobileNumber);
 }

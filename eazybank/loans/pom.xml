@@ -163,7 +163,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>nins07/${project.artifactId}:eazyloanseurekav1</image>
+                        <image>nins07/${project.artifactId}:eazyloanscrosscuttingv1</image>
                     </to>
                 </configuration>
 			</plugin>

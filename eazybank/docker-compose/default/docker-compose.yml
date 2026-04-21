@@ -1,6 +1,6 @@
 services:
   configserver:
-    image: "nins07/configserver:eazyconfigservereurekav1"
+    image: "nins07/configserver:eazyconfigservercrosscuttingv1"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -16,7 +16,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: "nins07/eurekaserver:eazyeurekaservereurekav1"
+    image: "nins07/eurekaserver:eazyeurekaservercrosscuttingv1"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -37,10 +37,17 @@ services:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
   accounts:
-    image: "nins07/accounts:eazyaccountseurekav1"
+    image: "nins07/accounts:eazyaccountscrosscuttingv1"
     container_name: accounts-ms
     ports:
       - "8080:8080"
+    healthcheck:
+      # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
+      test: [ "CMD-SHELL", "wget --spider -q http://localhost:8080/actuator/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
     depends_on:
       configserver:
         condition: service_healthy # Wait until configserver is fully UP
@@ -54,10 +61,17 @@ services:
       service: microservice-eureka-config
 
   loans:
-    image: "nins07/loans:eazyloanseurekav1"
+    image: "nins07/loans:eazyloanscrosscuttingv1"
     container_name: loans-ms
     ports:
       - "8090:8090"
+    healthcheck:
+      # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
+      test: [ "CMD-SHELL", "wget --spider -q http://localhost:8090/actuator/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
     depends_on:
       configserver:
         condition: service_healthy
@@ -70,10 +84,17 @@ services:
       service: microservice-eureka-config
 
   card:
-    image: "nins07/card:eazycardseurekav1"
+    image: "nins07/card:eazycardscrosscuttingv1"
     container_name: cards-ms
     ports:
       - "9000:9000"
+    healthcheck:
+      # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
+      test: [ "CMD-SHELL", "wget --spider -q http://localhost:9000/actuator/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
     depends_on:
       configserver:
         condition: service_healthy
@@ -81,6 +102,24 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "cards"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  gatewayserver:
+    image: "nins07/gatewayserver:eazygatewayservercrosscuttingv1"
+    container_name: gatewayserver-ms
+    ports:
+      - "8072:8072"
+    depends_on:
+      accounts:
+        condition: service_healthy
+      loans:
+        condition: service_healthy
+      card:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "gatewayserver"
     extends:
       file: common-config.yml
       service: microservice-eureka-config

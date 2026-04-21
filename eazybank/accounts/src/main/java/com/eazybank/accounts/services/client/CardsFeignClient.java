@@ -15,6 +15,6 @@ public interface CardsFeignClient {
 
     @GetMapping(value="/eazybank/api/fetch", consumes="application/json")
     public ResponseEntity<CardsDto> fetchCardsDetails(
-            @RequestHeader("Eazybank -correlation-id")String correlationID,
+            @RequestHeader("eazybank-correlation-id")String correlationID,
             @RequestParam String mobileNumber);
 }

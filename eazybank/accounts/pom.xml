@@ -157,7 +157,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>nins07/${project.artifactId}:eazyaccountseurekav1</image>
+                        <image>nins07/${project.artifactId}:eazyaccountscrosscuttingv1</image>
                     </to>
                 </configuration>
             </plugin>
