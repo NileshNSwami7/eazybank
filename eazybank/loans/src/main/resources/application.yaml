@@ -57,9 +57,8 @@ info:
     description: "Eazy Bank loans Application."
     version: "1.0.0"
 
-
 logging:
   level:
     com:
-      eazybank:
+      eazybytes:
         loans: DEBUG
