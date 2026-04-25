@@ -69,7 +69,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>nins07/${project.artifactId}:eazyconfigservercrosscuttingv1</image>
+                        <image>nins07/${project.artifactId}:eazyconfigserverresiliencyv1</image>
                     </to>
                 </configuration>
             </plugin>

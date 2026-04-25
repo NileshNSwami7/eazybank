@@ -73,7 +73,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>nins07/${project.artifactId}:eazyeurekaservercrosscuttingv1</image>
+                        <image>nins07/${project.artifactId}:eazyeurekaserverresiliencyv1</image>
                     </to>
                 </configuration>
             </plugin>

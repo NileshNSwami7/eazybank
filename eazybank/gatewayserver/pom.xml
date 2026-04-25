@@ -90,7 +90,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>nins07/${project.artifactId}:eazygatewayservercrosscuttingv1</image>
+                        <image>nins07/${project.artifactId}:eazygatewayserverresiliencyv1</image>
                     </to>
                 </configuration>
             </plugin>
