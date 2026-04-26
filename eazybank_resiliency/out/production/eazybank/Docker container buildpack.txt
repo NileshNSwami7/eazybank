@@ -1,0 +1,13 @@
+2nd approach to create docker image:
+
+Running a spring boot app as a container Buildpack 
+	
+	1.open pom.xml add 
+		<image>
+			<name>dockeraccount name in lowercase/${project.artifactId}:tag name</name>
+		</image>
+	2.open cmd from perticular path
+		mvn spring-boot:build-image
+	3.run docker container command i.e
+		docker run -d -p port nubmer:port number dockeraccount name/docker imagename:tag name
+		(e.g docker run -d -p 8090:8090 NilNS07/loans:eazyloansv1)

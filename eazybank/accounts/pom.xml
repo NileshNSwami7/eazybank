@@ -161,7 +161,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>nins07/${project.artifactId}:eazyaccountsresiliencyv1</image>
+                        <image>nins07/${project.artifactId}:eazyaccountsobservabilityv1</image>
                     </to>
                 </configuration>
             </plugin>
