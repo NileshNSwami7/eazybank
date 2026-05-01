@@ -93,6 +93,19 @@ services:
       file: common-config.yml
       service: network-deploy-service
 
+  tempo:
+    image: grafana/tempo:2.9.0
+    container_name: tempo
+    command: -config.file /etc/tempo-config.yml
+    ports:
+      - "3110:3100"
+      - "4318:4318"
+    volumes:
+      - ../observability/tempo/tempo.yml:/etc/tempo-config.yml
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   grafana:
       image: grafana/grafana:latest
       environment:
@@ -112,9 +125,9 @@ services:
         - ../observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       healthcheck:
         test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
-        interval: 10s
+        interval: 20s
         timeout: 5s
-        retries: 5
+        retries: 20
       extends:
         file: common-config.yml
         service: network-deploy-service
@@ -134,7 +147,7 @@ services:
         start_period: 30s
         interval: 30s
         timeout: 10s
-        retries: 5
+        retries: 20
       extends:
         file: common-config.yml
         service: network-deploy-service
@@ -203,9 +216,9 @@ services:
         - "3100:3100"
       healthcheck:
         test: [ "CMD", "service", "nginx", "status" ]
-        interval: 10s
+        interval: 20s
         timeout: 5s
-        retries: 5
+        retries: 20
       extends:
         file: common-config.yml
         service: network-deploy-service
@@ -218,13 +231,15 @@ services:
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
       test: ["CMD-SHELL", "wget --spider -q http://localhost:8071/actuator/health || exit 1"]
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 12
+      retries: 20
       start_period: 20s
     extends:
       file: common-config.yml
       service: microservice-base-config
+    environment:
+      OTEL_SERVICE_NAME: "configserver"
 
   eurekaserver:
     image: "nins07/eurekaserver:eazyeurekaserverobservabilityv1"
@@ -237,15 +252,16 @@ services:
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
       test: [ "CMD-SHELL", "wget --spider -q http://localhost:8070/actuator/health || exit 1" ]
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 12
+      retries: 20
       start_period: 20s
     extends:
       file: common-config.yml
       service: microservice-configserver-config
     environment:
       SPRING_APPLICATION_NAME: "eurekaserver"
+      OTEL_SERVICE_NAME: "eurekaserver"
 
   accounts:
     image: "nins07/accounts:eazyaccountsobservabilityv1"
@@ -255,9 +271,9 @@ services:
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
       test: [ "CMD-SHELL", "wget --spider -q http://localhost:8080/actuator/health || exit 1" ]
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 12
+      retries: 20
       start_period: 20s
     depends_on:
       configserver:
@@ -266,6 +282,7 @@ services:
         condition: service_healthy # Wait until eurekaserver is fully UP
     environment:
       SPRING_APPLICATION_NAME: "accounts"
+      OTEL_SERVICE_NAME: "accounts"
       # In Boot 4, ensure the config server URL is explicitly passed if not in common-config
     extends:
       file: common-config.yml
@@ -279,9 +296,9 @@ services:
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
       test: [ "CMD-SHELL", "wget --spider -q http://localhost:8090/actuator/health || exit 1" ]
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 12
+      retries: 20
       start_period: 20s
     depends_on:
       configserver:
@@ -290,6 +307,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "loans"
+      OTEL_SERVICE_NAME: "loans"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -302,9 +320,9 @@ services:
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
       test: [ "CMD-SHELL", "wget --spider -q http://localhost:9000/actuator/health || exit 1" ]
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 12
+      retries: 20
       start_period: 20s
     depends_on:
       configserver:
@@ -313,6 +331,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "cards"
+      OTEL_SERVICE_NAME: "cards"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -331,6 +350,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "gatewayserver"
+      OTEL_SERVICE_NAME: "gatewayserver"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
