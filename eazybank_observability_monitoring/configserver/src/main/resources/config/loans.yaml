@@ -1,0 +1,11 @@
+build:
+    version: "3.0.3"
+
+loans:
+  message: "Welcome to eazybank loans to related API."
+  contactDetails:
+    name: "Boby Singh"
+    email: "bodysingh@eazybank.com"
+  onCallSupport:
+    - (+94) 87645 98465
+    - (+94) 87645 98409

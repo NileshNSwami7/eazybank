@@ -1,0 +1,11 @@
+build:
+  version: "2.0.3"
+
+loans:
+  message: "Welcome to eazybank loans to qa related API."
+  contactDetails:
+    name: "Vidya barbole"
+    email: "vidya@eazybank.com"
+  onCallSupport:
+    - (+19) 756245 98765
+    - (+19) 756245 98787
