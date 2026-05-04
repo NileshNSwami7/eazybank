@@ -12,7 +12,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "nins07/configserver:eazyconfigserverresiliencyv1"
+    image: "nins07/configserver:eazyconfigserversecurityv1"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -28,7 +28,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: "nins07/eurekaserver:eazyeurekaserverresiliencyv1"
+    image: "nins07/eurekaserver:eazyeurekaserversecurityv1"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -49,7 +49,7 @@ services:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
   accounts:
-    image: "nins07/accounts:eazyaccountsresiliencyv1"
+    image: "nins07/accounts:eazyaccountssecurityv1"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -73,7 +73,7 @@ services:
       service: microservice-eureka-config
 
   loans:
-    image: "nins07/loans:eazyloansresiliencyv1"
+    image: "nins07/loans:eazyloanssecurityv1"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -96,7 +96,7 @@ services:
       service: microservice-eureka-config
 
   card:
-    image: "nins07/card:eazycardsresiliencyv1"
+    image: "nins07/card:eazycardssecurityv1"
     container_name: cards-ms
     ports:
       - "9000:9000"
@@ -119,7 +119,7 @@ services:
       service: microservice-eureka-config
 
   gatewayserver:
-    image: "nins07/gatewayserver:eazygatewayserverresiliencyv1"
+    image: "nins07/gatewayserver:eazygatewayserversecurityv1"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"

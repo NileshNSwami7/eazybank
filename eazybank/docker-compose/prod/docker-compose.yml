@@ -1,4 +1,17 @@
 services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.7
+    container_name: keycloak
+    ports:
+      - "127.0.0.1:7080:8080"
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: "admin"
+      KC_BOOTSTRAP_ADMIN_PASSWORD: "admin"
+    command: "start-dev"
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   read:
     image: grafana/loki:latest
     command: "-config.file=/etc/loki/config.yaml -target=read -query-scheduler.use-scheduler-ring=false"
@@ -224,7 +237,7 @@ services:
         service: network-deploy-service
 
   configserver:
-    image: "nins07/configserver:eazyconfigserverobservabilityv1"
+    image: "nins07/configserver:eazyconfigserversecurityv1"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -242,7 +255,7 @@ services:
       OTEL_SERVICE_NAME: "configserver"
 
   eurekaserver:
-    image: "nins07/eurekaserver:eazyeurekaserverobservabilityv1"
+    image: "nins07/eurekaserver:eazyeurekaserversecurityv1"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -264,17 +277,15 @@ services:
       OTEL_SERVICE_NAME: "eurekaserver"
 
   accounts:
-    image: "nins07/accounts:eazyaccountsobservabilityv1"
+    image: "nins07/accounts:eazyaccountssecurityv1"
     container_name: accounts-ms
-    ports:
-      - "8080:8080"
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
       test: [ "CMD-SHELL", "wget --spider -q http://localhost:8080/actuator/health || exit 1" ]
       interval: 20s
       timeout: 5s
       retries: 20
-      start_period: 20s
+      start_period: 10s
     depends_on:
       configserver:
         condition: service_healthy # Wait until configserver is fully UP
@@ -289,17 +300,15 @@ services:
       service: microservice-eureka-config
 
   loans:
-    image: "nins07/loans:eazyloansobservabilityv1"
+    image: "nins07/loans:eazyloanssecurityv1"
     container_name: loans-ms
-    ports:
-      - "8090:8090"
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
       test: [ "CMD-SHELL", "wget --spider -q http://localhost:8090/actuator/health || exit 1" ]
       interval: 20s
       timeout: 5s
       retries: 20
-      start_period: 20s
+      start_period: 10s
     depends_on:
       configserver:
         condition: service_healthy
@@ -313,17 +322,15 @@ services:
       service: microservice-eureka-config
 
   card:
-    image: "nins07/card:eazycardsobservabilityv1"
+    image: "nins07/card:eazycardssecurityv1"
     container_name: cards-ms
-    ports:
-      - "9000:9000"
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
       test: [ "CMD-SHELL", "wget --spider -q http://localhost:9000/actuator/health || exit 1" ]
       interval: 20s
       timeout: 5s
       retries: 20
-      start_period: 20s
+      start_period: 10s
     depends_on:
       configserver:
         condition: service_healthy
@@ -337,7 +344,7 @@ services:
       service: microservice-eureka-config
 
   gatewayserver:
-    image: "nins07/gatewayserver:eazygatewayserverobservabilityv1"
+    image: "nins07/gatewayserver:eazygatewayserversecurityv1"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"
@@ -351,6 +358,7 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "gatewayserver"
       OTEL_SERVICE_NAME: "gatewayserver"
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:8080/realms/master/protocol/openid-connect/certs"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
