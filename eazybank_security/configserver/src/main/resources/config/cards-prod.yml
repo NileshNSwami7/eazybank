@@ -1,0 +1,11 @@
+build:
+  version: "1.0.1"
+
+cards:
+  message: "Welcome to eazybank cards to prod related API."
+  contactDetails:
+    name: "Rajesh sane"
+    email: "rajs@eazybank.com"
+  onCallSupport:
+    - (+19) 736063 93487
+    - (+19) 736063 93467
