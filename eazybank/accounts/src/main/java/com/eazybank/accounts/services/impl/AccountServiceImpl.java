@@ -1,6 +1,7 @@
 package com.eazybank.accounts.services.impl;
 
 import com.eazybank.accounts.constants.AccountsConstants;
+import com.eazybank.accounts.dto.AccountMsgDto;
 import com.eazybank.accounts.dto.AccountsDto;
 import com.eazybank.accounts.dto.CustomerDto;
 import com.eazybank.accounts.entity.Accounts;
@@ -13,6 +14,9 @@ import com.eazybank.accounts.repository.AccountsRepository;
 import com.eazybank.accounts.repository.CustomerRepository;
 import com.eazybank.accounts.services.IAccountsService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,8 +27,11 @@ import java.util.Random;
 @AllArgsConstructor
 public class AccountServiceImpl implements IAccountsService {
 
+    private static final Logger log = LoggerFactory.getLogger(AccountServiceImpl.class);
+
     private AccountsRepository accountsRepository;
     private CustomerRepository customerRepository;
+    private final StreamBridge streamBridge;
 
     public void createAccount(CustomerDto customerDto){
     Customer customer = CustomerMapper.mapToCustomer(customerDto, new Customer());
@@ -34,9 +41,18 @@ public class AccountServiceImpl implements IAccountsService {
                     + customerDto.getMobileNumber());
         }
         Customer savedCustomer = customerRepository.save(customer);
-        accountsRepository.save(createAccount(savedCustomer));
+        Accounts savedAccount =  accountsRepository.save(createAccount(savedCustomer));
+        sendCommunication(savedAccount, savedCustomer);
     }
 
+    private void sendCommunication(Accounts accounts, Customer customer){
+        var accountsMsgsDto = new AccountMsgDto(accounts.getAccountNumber(),customer.getName(),
+                customer.getEmail(),customer.getMobileNumber());
+        log.info("Sending Communication request for the clients: {}", accountsMsgsDto);
+        var result = streamBridge.send("sendingCommunication-out-0", accountsMsgsDto);
+        log.info("Is the Communication request successfully triggered ? : {} ",result);
+
+    }
     private Accounts createAccount(Customer customer){
         Accounts account = new Accounts();
         account.setCustomerId(customer.getCustomerId());
