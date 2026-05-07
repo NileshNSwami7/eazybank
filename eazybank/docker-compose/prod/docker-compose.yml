@@ -1,4 +1,20 @@
 services:
+  rabbit:
+    image: rabbitmq:4.0-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   keycloak:
     image: quay.io/keycloak/keycloak:26.4.7
     container_name: keycloak
@@ -25,7 +41,6 @@ services:
       - minio
     healthcheck:
       test: [ "CMD", "/usr/bin/loki", "-health" ]
-      start_period: 30s
       interval: 10s
       timeout: 5s
       retries: 5
@@ -45,7 +60,6 @@ services:
         - ../observability/loki/loki-config.yml:/etc/loki/config.yaml
       healthcheck:
         test: [ "CMD", "/usr/bin/loki", "-health" ]
-        start_period: 30s
         interval: 10s
         timeout: 5s
         retries: 5
@@ -138,9 +152,9 @@ services:
         - ../observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       healthcheck:
         test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
-        interval: 20s
+        interval: 10s
         timeout: 5s
-        retries: 20
+        retries: 5
       extends:
         file: common-config.yml
         service: network-deploy-service
@@ -229,15 +243,15 @@ services:
         - "3100:3100"
       healthcheck:
         test: [ "CMD", "service", "nginx", "status" ]
-        interval: 20s
+        interval: 10s
         timeout: 5s
-        retries: 20
+        retries: 5
       extends:
         file: common-config.yml
         service: network-deploy-service
 
   configserver:
-    image: "nins07/configserver:eazyconfigserversecurityv1"
+    image: "nins07/configserver:eazyconfigservereventdrivenv1"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -247,7 +261,7 @@ services:
       interval: 20s
       timeout: 5s
       retries: 20
-      start_period: 20s
+      start_period: 10s
     extends:
       file: common-config.yml
       service: microservice-base-config
@@ -255,7 +269,7 @@ services:
       OTEL_SERVICE_NAME: "configserver"
 
   eurekaserver:
-    image: "nins07/eurekaserver:eazyeurekaserversecurityv1"
+    image: "nins07/eurekaserver:eazyeurekaservereventdrivenv1"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -268,7 +282,7 @@ services:
       interval: 20s
       timeout: 5s
       retries: 20
-      start_period: 20s
+      start_period: 10s
     extends:
       file: common-config.yml
       service: microservice-configserver-config
@@ -277,7 +291,7 @@ services:
       OTEL_SERVICE_NAME: "eurekaserver"
 
   accounts:
-    image: "nins07/accounts:eazyaccountssecurityv1"
+    image: "nins07/accounts:eazyaccountseventdrivenv1"
     container_name: accounts-ms
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
@@ -291,16 +305,19 @@ services:
         condition: service_healthy # Wait until configserver is fully UP
       eurekaserver:
         condition: service_healthy # Wait until eurekaserver is fully UP
+      rabbit:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "accounts"
       OTEL_SERVICE_NAME: "accounts"
+      SPRING_RABBITMQ_HOST: "rabbit"
       # In Boot 4, ensure the config server URL is explicitly passed if not in common-config
     extends:
       file: common-config.yml
       service: microservice-eureka-config
 
   loans:
-    image: "nins07/loans:eazyloanssecurityv1"
+    image: "nins07/loans:eazyloanseventdrivenv1"
     container_name: loans-ms
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
@@ -322,7 +339,7 @@ services:
       service: microservice-eureka-config
 
   card:
-    image: "nins07/card:eazycardssecurityv1"
+    image: "nins07/card:eazycardseventdrivenv1"
     container_name: cards-ms
     healthcheck:
       # Spring Boot 4 specific: Using curl/wget to check the Actuator health path
@@ -343,8 +360,20 @@ services:
       file: common-config.yml
       service: microservice-eureka-config
 
+  message:
+    image: "nins07/message:eazybankmessageeventdrivenv1"
+    container_name: message-ms
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    environment:
+      SPRING_RABBITMQ_HOST: "rabbit"
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   gatewayserver:
-    image: "nins07/gatewayserver:eazygatewayserversecurityv1"
+    image: "nins07/gatewayserver:eazygatewayservereventdrivenv1"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"

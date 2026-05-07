@@ -174,7 +174,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>nins07/${project.artifactId}:eazyloanssecurityv1</image>
+                        <image>nins07/${project.artifactId}:eazyloanseventdrivenv1</image>
                     </to>
                 </configuration>
 			</plugin>

@@ -26,7 +26,7 @@ spring:
       circuitbreaker:
         enabled: true
     function:
-      defination: updateCommunication
+      definition: updateCommunication
     stream:
       bindings:
         updateCommunication-in-0:
@@ -40,7 +40,6 @@ spring:
     username: guest
     password: guest
     connection-timeout: 10s
-
 management:
         endpoints:
           web:

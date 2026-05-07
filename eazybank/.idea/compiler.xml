@@ -21,7 +21,7 @@
         <module name="configserver" />
         <module name="message" />
       </profile>
-      <profile name="Annotation profile for loans" enabled="true">
+      <profile name="Annotation profile for card" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -29,8 +29,8 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.44/lombok-1.18.44.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.44/lombok-1.18.44.jar" />
         </processorPath>
-        <module name="loans" />
         <module name="card" />
+        <module name="loans" />
       </profile>
     </annotationProcessing>
   </component>

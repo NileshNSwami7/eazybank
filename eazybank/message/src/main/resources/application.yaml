@@ -1,17 +1,18 @@
 server:
   port: 9010
+
 spring:
   application:
     name: "message"
   cloud:
     function:
-      defination: email|sms
+      definition: email|sms
     stream:
       bindings:
         emailsms-in-0:
           destination: send-communication
           group: ${spring.application.name}
-        eamilsms-out-0:
+        emailsms-out-0:
           destination: communication-sent
   rabbitmq:
     host: localhost

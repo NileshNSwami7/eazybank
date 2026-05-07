@@ -49,7 +49,7 @@ public class AccountServiceImpl implements IAccountsService {
         var accountsMsgsDto = new AccountMsgDto(accounts.getAccountNumber(),customer.getName(),
                 customer.getEmail(),customer.getMobileNumber());
         log.info("Sending Communication request for the clients: {}", accountsMsgsDto);
-        var result = streamBridge.send("sendingCommunication-out-0", accountsMsgsDto);
+        var result = streamBridge.send("sendCommunication-out-0", accountsMsgsDto);
         log.info("Is the Communication request successfully triggered ? : {} ",result);
 
     }
@@ -102,5 +102,19 @@ public class AccountServiceImpl implements IAccountsService {
         accountsRepository.deleteBycustomerId(customer.getCustomerId());
         customerRepository.deleteById(customer.getCustomerId());
         return true;
+    }
+
+    @Override
+    public boolean updateCommunicationStatus(Long accountNumber) {
+        boolean isUpdated = false;
+        if(accountNumber !=null){
+            Accounts account = accountsRepository.findById(accountNumber).orElseThrow(
+                    ()->new ResourceNotFoundException("Account","AccountNumber",accountNumber.toString())
+            );
+            account.setCommunicationSw(true);
+            accountsRepository.save(account);
+            isUpdated = true;
+        }
+        return isUpdated;
     }
 }
