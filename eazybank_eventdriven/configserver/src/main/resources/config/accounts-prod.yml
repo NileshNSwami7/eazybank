@@ -1,0 +1,11 @@
+build:
+  version: "1.0.0"
+
+accounts:
+  message: "Welcome to eazybank accounts to prod related API."
+  contactDetails:
+    name: "minakshi joshi"
+    email: "mj@eazybank.com"
+  onCallSupport:
+    - (+07) 28063 93767
+    - (+01) 28063 93787

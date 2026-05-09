@@ -113,7 +113,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>nins07/${project.artifactId}:eazygatewayservereventdrivenv1</image>
+                        <image>nins07/${project.artifactId}:eazygatewayserverkafkav1</image>
                     </to>
                 </configuration>
             </plugin>

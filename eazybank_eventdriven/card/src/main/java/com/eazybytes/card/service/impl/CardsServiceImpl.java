@@ -1,0 +1,65 @@
+package com.eazybytes.card.service.impl;
+
+import com.eazybytes.card.constants.CardsConstants;
+import com.eazybytes.card.dto.CardsDto;
+import com.eazybytes.card.entity.Cards;
+import com.eazybytes.card.exception.CardAlreadyExistsException;
+import com.eazybytes.card.exception.ResourceNotFoundException;
+import com.eazybytes.card.mapper.CardsMapper;
+import com.eazybytes.card.repository.CardsRepository;
+import com.eazybytes.card.service.CardsService;
+import io.swagger.v3.oas.annotations.Operation;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.Random;
+
+@Service
+@AllArgsConstructor
+public class CardsServiceImpl implements CardsService {
+
+    private CardsRepository cardsRepository;
+    public void createCard(String mobileNumber){
+        Optional<Cards> optional = cardsRepository.findByMobileNumber(mobileNumber);
+        if(optional.isPresent()){
+            throw new CardAlreadyExistsException("Card  already registered with given mobile number"+mobileNumber);
+        }
+        cardsRepository.save(createNewCard(mobileNumber));
+    }
+
+    private Cards createNewCard(String mobileNumber){
+        Cards newcard = new Cards();
+        long randomCardNumber = 100000000000L + new Random().nextInt(900000000);
+        newcard.setCardNumber(Long.toString(randomCardNumber));
+        newcard.setMobileNumber(mobileNumber);
+        newcard.setCardType(CardsConstants.CREDIT_CARD);
+        newcard.setTotalLimit(CardsConstants.NEW_CARD_LIMIT);
+        newcard.setAmountUsed(0);
+        newcard.setAvailableAmount(CardsConstants.NEW_CARD_LIMIT);
+        return  newcard;
+    }
+
+    public CardsDto fetchcardsDetials(String mobileNumber){
+        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).
+                orElseThrow(()->new ResourceNotFoundException("Cards","mobileNumber",mobileNumber)
+                );
+        return CardsMapper.mapToCarsDto(cards, new CardsDto());
+    }
+
+    public boolean updatecardsDetails(CardsDto cardsDto){
+        Cards cards = cardsRepository.findByCardNumber(cardsDto.getCardNumber().toString())
+                .orElseThrow(()->new ResourceNotFoundException
+                        ("Cards","mobileNumber",cardsDto.getMobileNumber().toString()));
+        CardsMapper.mapToCards(cardsDto, cards);
+        cardsRepository.save(cards);
+        return true;
+    }
+
+    public boolean deleteCardDetails(String mobileNumber){
+        Cards cards = cardsRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(()->new ResourceNotFoundException("Cards","mobileNumber",mobileNumber));
+        cardsRepository.deleteById(cards.getCardId());
+        return true;
+    }
+}
