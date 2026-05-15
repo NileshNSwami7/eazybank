@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: configserver
-        image: nins07/configserver:eazyconfigserversecurityv1
+        image: nins07/configserver:eazyconfigserverkafkav1
         ports:
         - containerPort: 8071
 ---
